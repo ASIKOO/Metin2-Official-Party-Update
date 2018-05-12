@@ -110,13 +110,4 @@ if app.BL_PARTY_UPDATE:
 		351 : MAP_N_FLAME_DUNGEON_01,
 		352 : MAP_N_SNOW_DUNGEON_01,
 	}
-	if background.IsMapInfoByMapName("metin2_map_dawnmist_dungeon_01"):
-		MINIMAP_ZONE_NAME_DICT_BY_IDX[353] = MAP_DAWNMIST_DUNGEON_01
-	if background.IsMapInfoByMapName("metin2_map_Mt_Th_dungeon_01"):
-		MINIMAP_ZONE_NAME_DICT_BY_IDX[354] = MAP_MT_TH_DUNGEON_01
-	if background.IsMapInfoByMapName("metin2_map_n_flame_dragon"):
-		MINIMAP_ZONE_NAME_DICT_BY_IDX[356] = MAP_N_FLAME_DRAGON
-	if background.IsMapInfoByMapName("metin2_map_battlefied"):
-		MINIMAP_ZONE_NAME_DICT_BY_IDX[357] = MAP_BATTLE_FIELD
-	if background.IsMapInfoByMapName("metin2_12zi_stage"):
-		MINIMAP_ZONE_NAME_DICT_BY_IDX[355] = MAP_CZ_DUNGEON
+	
