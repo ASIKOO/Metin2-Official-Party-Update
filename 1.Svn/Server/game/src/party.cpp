@@ -72,14 +72,15 @@ void CParty::P2PJoin(DWORD dwPID)
 				CCI * pcci = P2P_MANAGER::instance().FindByPID(dwPID);
 
 				if (!pcci);
-				else if (pcci->bChannel == g_bChannel)
+				else if (pcci->bChannel == g_bChannel) {
 					Member.strName = pcci->szName;
+					#ifdef BL_PARTY_UPDATE
+					Member.mapidx = pcci->lMapIndex;
+					Member.channel = pcci->bChannel;
+					#endif
+				}
 				else
 					sys_err("member is not in same channel PID: %u channel %d, this channel %d", dwPID, pcci->bChannel, g_bChannel);
-				#ifdef BL_PARTY_UPDATE
-				Member.mapidx = pcci->lMapIndex;
-				Member.channel = pcci->bChannel;
-				#endif
 			}
 		}
 
