@@ -146,6 +146,20 @@ void CParty::SendPartyJoinAllToOne(LPCHARACTER ch)
 }
 
 ///Change
+#ifdef BL_PARTY_UPDATE
+void CParty::SendPartyJoinAllToOne(LPCHARACTER ch)
+{
+	if (!ch->GetDesc())
+		return;
+	for (TMemberMap::iterator it = m_memberMap.begin();it!= m_memberMap.end(); ++it)
+	{
+		if (!it->second.pCharacter)
+			UpdateOfflineState(it->first);
+		else
+			UpdateOnlineState(it->first, it->second.strName.c_str(), it->second.channel, it->second.mapidx);
+	}
+}
+#else
 void CParty::SendPartyJoinAllToOne(LPCHARACTER ch)
 {
 	if (!ch->GetDesc())
@@ -155,19 +169,15 @@ void CParty::SendPartyJoinAllToOne(LPCHARACTER ch)
 
 	p.header = HEADER_GC_PARTY_ADD;
 	p.name[CHARACTER_NAME_MAX_LEN] = '\0';
+
 	for (TMemberMap::iterator it = m_memberMap.begin();it!= m_memberMap.end(); ++it)
 	{
 		p.pid = it->first;
 		strlcpy(p.name, it->second.strName.c_str(), sizeof(p.name));
-		p.channel = it->second.channel;
-		p.mapidx = it->second.mapidx;
-		#ifdef BL_PARTY_UPDATE
-		if (!it->second.pCharacter)
-			UpdateOfflineState(it->first);
-		#endif
 		ch->GetDesc()->Packet(&p, sizeof(p));
 	}
-}
+}	
+#endif
 
 //Find
 void CParty::SendPartyUnlinkOneToAll(LPCHARACTER ch)
