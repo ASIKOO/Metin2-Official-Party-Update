@@ -108,6 +108,9 @@ import app
 				self.__ArrangePartyMemberInfoBoard()
 				self.UpdateRect()
 			
+			if not name:
+				name = localeInfo.PARTY_MEMBER_OFFLINE
+				
 			view_channel = channel
 			if 99 == channel or mapIdx > 10000:
 				view_channel = 0
@@ -117,7 +120,6 @@ import app
 				
 			if mapIdx==0:
 				MapName = localeInfo.PARTY_MEMBER_OFFLINE
-				name = localeInfo.PARTY_MEMBER_OFFLINE
 				board.SetCurrentMapName(MapName)
 			elif mapIdx in localeInfo.MINIMAP_ZONE_NAME_DICT_BY_IDX:
 				MapName = localeInfo.MINIMAP_ZONE_NAME_DICT_BY_IDX[mapIdx]
