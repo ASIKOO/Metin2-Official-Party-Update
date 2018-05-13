@@ -155,7 +155,7 @@ void CParty::SendPartyJoinAllToOne(LPCHARACTER ch)
 
 	p.header = HEADER_GC_PARTY_ADD;
 	p.name[CHARACTER_NAME_MAX_LEN] = '\0';
-	#ifdef WJ_SHOW_PARTY_ON_MINIMAP
+	#ifdef BL_PARTY_UPDATE
 	p.channel = 0;
 	p.mapidx = 0;
 	#endif
