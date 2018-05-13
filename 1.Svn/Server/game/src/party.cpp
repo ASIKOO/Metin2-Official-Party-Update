@@ -155,19 +155,15 @@ void CParty::SendPartyJoinAllToOne(LPCHARACTER ch)
 
 	p.header = HEADER_GC_PARTY_ADD;
 	p.name[CHARACTER_NAME_MAX_LEN] = '\0';
-	#ifdef BL_PARTY_UPDATE
-	p.channel = 0;
-	p.mapidx = 0;
-	#endif
 	for (TMemberMap::iterator it = m_memberMap.begin();it!= m_memberMap.end(); ++it)
 	{
 		p.pid = it->first;
 		strlcpy(p.name, it->second.strName.c_str(), sizeof(p.name));
+		p.channel = it->second.channel;
+		p.mapidx = it->second.mapidx;
 		#ifdef BL_PARTY_UPDATE
-		if (it->second.pCharacter) {
-			p.channel = it->second.channel;
-			p.mapidx = it->second.mapidx;
-		}
+		if (!it->second.pCharacter)
+			UpdateOfflineState(it->first);
 		#endif
 		ch->GetDesc()->Packet(&p, sizeof(p));
 	}
