@@ -162,13 +162,13 @@ void CParty::SendPartyJoinAllToOne(LPCHARACTER ch)
 	for (TMemberMap::iterator it = m_memberMap.begin();it!= m_memberMap.end(); ++it)
 	{
 		p.pid = it->first;
-		if (it->second.pCharacter && it->second.pCharacter != ch) {
-			strlcpy(p.name, it->second.strName.c_str(), sizeof(p.name));
-			#ifdef WJ_SHOW_PARTY_ON_MINIMAP
+		strlcpy(p.name, it->second.strName.c_str(), sizeof(p.name));
+		#ifdef BL_PARTY_UPDATE
+		if (it->second.pCharacter) {
 			p.channel = it->second.channel;
 			p.mapidx = it->second.mapidx;
-			#endif
 		}
+		#endif
 		ch->GetDesc()->Packet(&p, sizeof(p));
 	}
 }
