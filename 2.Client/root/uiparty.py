@@ -107,9 +107,6 @@ import app
 				self.partyMemberInfoBoardList.append(board)
 				self.__ArrangePartyMemberInfoBoard()
 				self.UpdateRect()
-		
-			if not name:
-				name = localeInfo.PARTY_MEMBER_OFFLINE
 			
 			view_channel = channel
 			if 99 == channel or mapIdx > 10000:
@@ -118,9 +115,9 @@ import app
 			if mapIdx > 10000:
 				mapIdx = mapIdx/10000;
 				
-			board.SetCharacterName(name)
 			if mapIdx==0:
 				MapName = localeInfo.PARTY_MEMBER_OFFLINE
+				name = localeInfo.PARTY_MEMBER_OFFLINE
 				board.SetCurrentMapName(MapName)
 			elif mapIdx in localeInfo.MINIMAP_ZONE_NAME_DICT_BY_IDX:
 				MapName = localeInfo.MINIMAP_ZONE_NAME_DICT_BY_IDX[mapIdx]
@@ -133,6 +130,7 @@ import app
 			else:
 				board.Link()
 				
+			board.SetCharacterName(name)
 			self.Show()
 			self.partyMenuButton.Show()
 	else:
